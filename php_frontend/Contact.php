@@ -1,4 +1,11 @@
-<?php include 'header.php'; ?>
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: ../LogIn.php");
+    exit();
+}
+include 'Header.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +21,7 @@
 <!-- HERO -->
 <section class="contact-hero">
   <h1>Get In Touch</h1>
-  <p>Ready to start your fitness journey? Have questions about our programs?  
+  <p>Ready to start your fitness journey? Have questions about our programs?
   We’re here to help every step of the way. Let’s talk!</p>
 </section>
 
@@ -108,4 +115,4 @@
 </body>
 </html>
 
-<?php include 'footer.php'; ?>
+<?php include 'Footer.php'; ?>

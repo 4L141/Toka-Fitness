@@ -1,4 +1,11 @@
-<?php include 'header.php'; ?>
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: ../LogIn.php");
+    exit();
+}
+include 'Header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +93,6 @@
 <script src="Motivation.js"></script>
 <script src="Hamburger.js"></script>
 
-<?php include 'footer.php'; ?>
+<?php include 'Footer.php'; ?>
 </body>
 </html>
