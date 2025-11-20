@@ -71,6 +71,96 @@ namespace ConsoleBackend
                 return new Response { Status = "error", Message = ex.Message };
             }
         }
+
+        public static Response GetUsers()
+        {
+            try
+            {
+                using (var conn = Database.GetConnection())
+                {
+                    var cmd = new MySqlCommand("SELECT user_id, first_name, last_name, email, password, reg_date, is_admin FROM users", conn);
+                    var reader = cmd.ExecuteReader();
+
+                    var users = new List<Dictionary<string, object>>();
+
+                    while (reader.Read())
+                    {
+                        users.Add(new Dictionary<string, object>
+                        {
+                            { "user_id", reader["user_id"] },
+                            { "first_name", reader["first_name"] },
+                            { "last_name", reader["last_name"] },
+                            { "email", reader["email"] },
+                            { "password", reader["password"] },
+                            { "reg_date", reader["reg_date"] },
+                            { "is_admin", reader["is_admin"] }
+                        });
+                    }
+
+                    return new Response
+                    {
+                        Status = "success",
+                        Message = "Users retrieved successfully",
+                        User = null,
+                        // add a new property in Response if needed (like UsersList)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response { Status = "error", Message = ex.Message };
+            }
+        }
+
+        public static Response UpdateUser(Request req)
+        {
+            try
+            {
+                using (var conn = Database.GetConnection())
+                {
+                    var cmd = new MySqlCommand("UPDATE users SET first_name=@first_name, last_name=@last_name, email=@email WHERE user_id=@id", conn);
+                    cmd.Parameters.AddWithValue("@first_name", req.first_name);
+                    cmd.Parameters.AddWithValue("@last_name", req.last_name);
+                    cmd.Parameters.AddWithValue("@email", req.email);
+                    cmd.Parameters.AddWithValue("@id", req.user_id);
+                    int rows = cmd.ExecuteNonQuery();
+
+                    if (rows > 0)
+                        return new Response { Status = "success", Message = "User updated successfully" };
+                    else
+                        return new Response { Status = "error", Message = "No user found to update" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response { Status = "error", Message = ex.Message };
+            }
+        }
+
+        public static Response DeleteUser(Request req)
+        {
+            try
+            {
+                using (var conn = Database.GetConnection())
+                {
+                    var cmd = new MySqlCommand("DELETE FROM users WHERE user_id=@id", conn);
+                    cmd.Parameters.AddWithValue("@id", req.user_id);
+                    int rows = cmd.ExecuteNonQuery();
+
+                    if (rows > 0)
+                        return new Response { Status = "success", Message = "User deleted successfully" };
+                    else
+                        return new Response { Status = "error", Message = "No user found to delete" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response { Status = "error", Message = ex.Message };
+            }
+}
+
+
+
     }
 }
 

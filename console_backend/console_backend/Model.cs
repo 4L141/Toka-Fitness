@@ -31,6 +31,10 @@ namespace ConsoleBackend
 
         [JsonProperty("User")]
         public UserData User { get; set; }
+
+        [JsonProperty("UsersList")]
+        public List<Dictionary<string, object>> UsersList { get; set; }
+
     }
 
     public class UserData

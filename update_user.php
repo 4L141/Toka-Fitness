@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     file_put_contents($inputFile, json_encode($request, JSON_PRETTY_PRINT));
 
     // Run C# console backend
-    $exePath = 'C:\\xampp\\htdocs\\yourproject\\console_backend.exe'; // adjust path
+    $exePath = 'C:\xampp\htdocs\Student\202526\Ali\Toka-Fitness\console_backend\console_backend\bin\Debug\net8.0\console_backend.exe'; // adjust path
     exec("\"$exePath\" \"$inputFile\" \"$outputFile\"");
 
     // Read backend response

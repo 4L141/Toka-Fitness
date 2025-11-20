@@ -54,6 +54,18 @@ namespace ConsoleBackend
                         response = UserService.Login(request);
                         break;
 
+                    case "get_users":
+                        response = UserService.GetUsers();
+                        break;
+
+                    case "update_user":
+                        response = UserService.UpdateUser(request);
+                        break;
+
+                    case "delete_user":
+                        response = UserService.DeleteUser(request);
+                        break;
+
                     default:
                         response = new Response { Status = "error", Message = "Unknown action" };
                         break;

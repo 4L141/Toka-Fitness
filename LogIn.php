@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
     file_put_contents($inputFile, json_encode($data, JSON_PRETTY_PRINT));
 
     // Run C# console backend
-    $exePath = 'C:\\xampp\\htdocs\\yourproject\\console_backend.exe'; // ***update this path
+    $exePath = 'C:\xampp\htdocs\Student\202526\Ali\Toka-Fitness\console_backend\console_backend\bin\Debug\net8.0\console_backend.exe''; // ***update this path
     exec("\"$exePath\" \"$inputFile\" \"$outputFile\"");
 
     // Read backend response

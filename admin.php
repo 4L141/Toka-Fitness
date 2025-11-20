@@ -5,7 +5,7 @@
 	file_put_contents('request.json', json_encode($request, JSON_PRETTY_PRINT));
 
 	// Run the C# console backend
-	$exePath = 'C:\\xampp\\htdocs\\yourproject\\console_backend.exe'; // ***update path
+	$exePath = 'C:\xampp\htdocs\Student\202526\Ali\Toka-Fitness\console_backend\console_backend\bin\Debug\net8.0\console_backend.exe'; // ***update path
 	$inputPath = __DIR__ . '\\request.json';
 	$outputPath = __DIR__ . '\\response.json';
 
