@@ -28,4 +28,9 @@
   </nav>
 
   <a class="btn" href="Pricing.php">Join</a>
+  <?php if (isset($_SESSION['email'])): ?>
+    <a class="btn" href="../logout.php">Logout</a>
+  <?php else: ?>
+    <a class="btn" href="../LogIn.php">Login</a>
+  <?php endif; ?>
 </header>

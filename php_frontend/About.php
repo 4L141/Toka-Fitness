@@ -1,4 +1,11 @@
-<?php include 'header.php'; ?>
+<?php
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: ../LogIn.php");
+    exit();
+}
+include 'Header.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,4 +152,4 @@
 </body>
 </html>
 
-<?php include 'footer.php'; ?>
+<?php include 'Footer.php'; ?>

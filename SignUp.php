@@ -32,7 +32,7 @@ if (isset($_POST['signup'])) {
     file_put_contents($inputFile, json_encode($data, JSON_PRETTY_PRINT));
 
     // Step 3: Run the C# console backend
-    $exePath = 'C:\\xampp\\htdocs\\yourproject\\console_backend.exe'; // ⚠️ update this path to your actual location
+    $exePath = __DIR__ . '/console_backend/console_backend/bin/Debug/console_backend.exe';
     exec("\"$exePath\" \"$inputFile\" \"$outputFile\"");
 
     // Read backend response

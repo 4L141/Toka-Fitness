@@ -14,6 +14,8 @@
 </html>
 
 <?php
+session_start();
+
 if (isset($_POST['login'])) {
     // Build JSON request
     $data = [
@@ -27,7 +29,7 @@ if (isset($_POST['login'])) {
     file_put_contents($inputFile, json_encode($data, JSON_PRETTY_PRINT));
 
     // Run C# console backend
-    $exePath = 'C:\\xampp\\htdocs\\yourproject\\console_backend.exe'; // ***update this path
+    $exePath = __DIR__ . '/console_backend/console_backend/bin/Debug/console_backend.exe';
     exec("\"$exePath\" \"$inputFile\" \"$outputFile\"");
 
     // Read backend response
@@ -35,13 +37,14 @@ if (isset($_POST['login'])) {
         $response = json_decode(file_get_contents($outputFile), true);
 
         if ($response["Status"] === "success") {
+            $_SESSION['email'] = $_POST['email'];
             echo "<p style='color:green;text-align:center;'>Login successful! Redirecting...</p>";
 
             // Redirect based on admin/user role
             if (isset($response['User']) && $response['User']['email'] === 'admin@example.com') {
                 header("Refresh: 2; url=admin.php");
             } else {
-                header("Refresh: 2; url=home.php");
+                header("Refresh: 2; url=php_frontend/Homepage.php");
             }
         } else {
             echo "<p style='color:red;text-align:center;'>{$response['Message']}</p>";
@@ -51,5 +54,3 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
-
-

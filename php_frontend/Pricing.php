@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php
+session_start();
+include 'Header.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,7 +121,7 @@
     </div>
   </section>
 
-  <?php include 'footer.php'; ?>
+  <?php include 'Footer.php'; ?>
 
   <!-- scripts loaded at end so theme.js can bind correctly -->
   <script src="theme.js"></script>
